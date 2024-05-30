@@ -10,9 +10,4 @@ class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
         BehaviorDelegate.initialize();
     }
 
-    function onMenu() as Boolean {
-        WatchUi.pushView(new Rez.Menus.MainMenu(), new OrthostaticMenuDelegate(), WatchUi.SLIDE_UP);
-        return true;
-    }
-
 }
