@@ -13,7 +13,13 @@ A simple little application to take periodic orthostatic tests.
 **Related to Physical Training**
 
 - [Functional Training Institute](https://functionaltraininginstitute.com/orthostatic-heart-rate/)
-- []()
+
+**Garmin Watch Resources**
+
+- [ConnectIQ Basics](https://developer.garmin.com/connect-iq/connect-iq-basics/your-first-app/)
+- [Get the SDK](https://developer.garmin.com/connect-iq/sdk/)
+- [Reference](https://developer.garmin.com/connect-iq/api-docs/)
+- Owners manuals for devices...
 
 ## License
 
