@@ -23,7 +23,6 @@ class OrthostaticView extends WatchUi.View {
         _duration = findDrawableById("duration");
         _position = findDrawableById("position");
 
-        setStatus(Status.Initial);
         setDuration(300);
         setPosition(Position.LayingDown);
     }
@@ -51,11 +50,11 @@ class OrthostaticView extends WatchUi.View {
         var label = "";
 
         switch(status) {
-            case Status.Initial:
-                label = "Select to start";
+            case Status.Acclimation:
+                label = "Acclimating";
                 break;
-            case Status.InProgress:
-                label = "Test in progress";
+            case Status.Measurement:
+                label = "Measuring";
                 break;
             case Status.Finished:
                 label = "Finished";

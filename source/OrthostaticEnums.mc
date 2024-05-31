@@ -1,15 +1,18 @@
+// Copyright (C) 2024 Mya Pitzeruse
+// SPDX-License-Identifier: Apache-2.0
+
 class Position {
     enum {
         LayingDown,
         Sitting,
-        Standing
+        Standing,
     }
 }
 
 class Status {
     enum {
-        Initial,
-        InProgress,
-        Finished
+        Acclimation,
+        Measurement,
+        Finished,
     }
 }

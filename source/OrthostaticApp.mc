@@ -21,7 +21,9 @@ class OrthostaticApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        return [ new OrthostaticView(), new OrthostaticDelegate() ];
+        var view = new OrthostaticView();
+
+        return [ view, new OrthostaticDelegate(view) ];
     }
 
 }

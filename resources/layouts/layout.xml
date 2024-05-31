@@ -1,7 +1,7 @@
 <layout id="MainLayout">
     <label
         id="status"
-        text=""
+        text="Start when ready"
         x="center"
         y="20%"
         color="Graphics.COLOR_WHITE"
