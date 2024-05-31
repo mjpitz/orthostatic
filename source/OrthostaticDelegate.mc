@@ -1,6 +1,7 @@
 // Copyright (C) 2024 Mya Pitzeruse
 // SPDX-License-Identifier: Apache-2.0
 
+import Toybox.Attention;
 import Toybox.Lang;
 import Toybox.Timer;
 import Toybox.WatchUi;
@@ -27,6 +28,8 @@ class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
     private var _timer;
     private var _elapsed;
 
+    private var _lastPosition;
+
     function initialize(view as OrthostaticView) {
         BehaviorDelegate.initialize();
 
@@ -35,6 +38,8 @@ class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
         _started = false;
         _timer = new Timer.Timer();
         _elapsed = 0;
+
+        _lastPosition = _steps[_step][:position];
     }
 
     function onSelect() as Boolean {
@@ -57,17 +62,39 @@ class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
 
             if (_step == _steps.size()) {
                 _timer.stop();
+
                 _view.setStatus(Status.Finished);
+
+                _notify();
 
                 return;
             }
 
             _view.setPosition(_steps[_step][:position]);
             _view.setStatus(_steps[_step][:status]);
+
+            if (_lastPosition != _steps[_step][:position]) {
+                _lastPosition = _steps[_step][:position];
+
+                _notify();
+            }
         } else {
             _elapsed++;
         }
 
         _view.setDuration(_steps[_step][:duration] - _elapsed);
+    }
+
+    private function _notify() {
+        // todo: make this a configurable property for preferred notification method
+        if (Attention has :vibrate) {
+            Attention.vibrate([
+                new Attention.VibeProfile(50, 500),
+                new Attention.VibeProfile(0, 500),
+                new Attention.VibeProfile(50, 500),
+            ]);
+        } else if (Attention has :playTone) {
+            Attention.playTone(Attention.TONE_TIME_ALERT);
+        }
     }
 }
