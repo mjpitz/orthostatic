@@ -24,7 +24,7 @@ class OrthostaticView extends WatchUi.View {
         _position = findDrawableById("position");
 
         setDuration(300);
-        setPosition(Position.LayingDown);
+        setPosition(Position.LAYING_DOWN);
     }
 
     // Called when this View is brought to the foreground. Restore
@@ -48,20 +48,25 @@ class OrthostaticView extends WatchUi.View {
 
     function setStatus(status as Lang.Number) {
         var label = "";
+        var color = Graphics.COLOR_WHITE;
 
         switch(status) {
-            case Status.Acclimation:
+            case Status.ACCLIMATION:
                 label = "Acclimating";
+                color = Graphics.COLOR_YELLOW;
                 break;
-            case Status.Measurement:
+            case Status.MEASUREMENT:
                 label = "Measuring";
+                color = Graphics.COLOR_RED;
                 break;
-            case Status.Finished:
+            case Status.FINISHED:
                 label = "Finished";
+                color = Graphics.COLOR_GREEN;
                 break;
         }
 
         _status.setText(label);
+        _status.setColor(color);
 
         WatchUi.requestUpdate();
     }
@@ -84,13 +89,13 @@ class OrthostaticView extends WatchUi.View {
         var label = "";
 
         switch(position) {
-            case Position.LayingDown:
+            case Position.LAYING_DOWN:
                 label = "Laying down";
                 break;
-            case Position.Sitting:
+            case Position.SITTING:
                 label = "Sitting";
                 break;
-            case Position.Standing:
+            case Position.STANDING:
                 label = "Standing up";
                 break;
         }

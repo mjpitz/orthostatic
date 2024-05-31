@@ -3,59 +3,71 @@
 
 import Toybox.Attention;
 import Toybox.Lang;
+import Toybox.Sensor;
+import Toybox.System;
+import Toybox.Time;
 import Toybox.Timer;
 import Toybox.WatchUi;
 
-const MINUTE = 60;
+const MINUTE = 5;
 
 class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
-    private var _steps = [
-        {:position => Position.LayingDown, :status => Status.Acclimation, :duration => 5 * MINUTE},
-        {:position => Position.LayingDown, :status => Status.Measurement, :duration => MINUTE},
-        {:position => Position.Sitting, :status => Status.Acclimation, :duration => MINUTE},
-        {:position => Position.Sitting, :status => Status.Measurement, :duration => MINUTE},
-        {:position => Position.Standing, :status => Status.Acclimation, :duration => MINUTE},
-        {:position => Position.Standing, :status => Status.Measurement, :duration => MINUTE},
-        {:position => Position.Standing, :status => Status.Acclimation, :duration => 3 * MINUTE},
-        {:position => Position.Standing, :status => Status.Measurement, :duration => MINUTE},
+    private var _steps as Array<Dictionary<Symbol, Number>> = [
+        {:position => Position.LAYING_DOWN, :status => Status.ACCLIMATION, :duration => 5 * MINUTE},
+        {:position => Position.LAYING_DOWN, :status => Status.MEASUREMENT, :duration => MINUTE},
+        {:position => Position.SITTING, :status => Status.ACCLIMATION, :duration => MINUTE},
+        {:position => Position.SITTING, :status => Status.MEASUREMENT, :duration => MINUTE},
+        {:position => Position.STANDING, :status => Status.ACCLIMATION, :duration => MINUTE},
+        {:position => Position.STANDING, :status => Status.MEASUREMENT, :duration => MINUTE},
+        {:position => Position.STANDING, :status => Status.ACCLIMATION, :duration => 3 * MINUTE},
+        {:position => Position.STANDING, :status => Status.MEASUREMENT, :duration => MINUTE},
     ];
-    
     private var _step = 0;
-
-    private var _view;
 
     private var _started;
     private var _timer;
     private var _elapsed;
 
+    private var _data = [];
+
+    private var _view;
     private var _lastPosition;
 
     function initialize(view as OrthostaticView) {
         BehaviorDelegate.initialize();
-
-        _view = view;
         
-        _started = false;
         _timer = new Timer.Timer();
         _elapsed = 0;
 
-        _lastPosition = _steps[_step][:position];
+        _view = view;
     }
 
     function onSelect() as Boolean {
         if (_started) {
             return true;
         }
-
-        _view.setStatus(_steps[_step][:status]);
         
-        _started = true;
+        var step = _steps[_step];
+        
+        _started = Time.now();
         _timer.start(method(:tick), 1000, true);
+
+        _data.add({:step => step});
+
+        _view.setStatus(step[:status]);
+        _lastPosition = step[:position];
+
+        Sensor.setEnabledSensors([Sensor.SENSOR_ONBOARD_HEARTRATE]);
 
         return true;
     }
 
     function tick() as Void {
+        var sensorInfo = Sensor.getInfo();
+        if (sensorInfo has :heartRate && sensorInfo.heartRate != null) {
+            _data.add({:reading => sensorInfo.heartRate});
+        }
+        
         if (_elapsed == _steps[_step][:duration]) {
             _step++;
             _elapsed = 0;
@@ -63,18 +75,22 @@ class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
             if (_step == _steps.size()) {
                 _timer.stop();
 
-                _view.setStatus(Status.Finished);
+                _view.setStatus(Status.FINISHED);
 
                 _notify();
 
                 return;
             }
 
-            _view.setPosition(_steps[_step][:position]);
-            _view.setStatus(_steps[_step][:status]);
+            var step = _steps[_step];
 
-            if (_lastPosition != _steps[_step][:position]) {
-                _lastPosition = _steps[_step][:position];
+            _data.add({:step => step});
+
+            _view.setPosition(step[:position]);
+            _view.setStatus(step[:status]);
+
+            if (_lastPosition != step[:position]) {
+                _lastPosition = step[:position];
 
                 _notify();
             }

@@ -3,16 +3,16 @@
 
 class Position {
     enum {
-        LayingDown,
-        Sitting,
-        Standing,
+        LAYING_DOWN,
+        SITTING,
+        STANDING,
     }
 }
 
 class Status {
     enum {
-        Acclimation,
-        Measurement,
-        Finished,
+        ACCLIMATION,
+        MEASUREMENT,
+        FINISHED,
     }
 }
