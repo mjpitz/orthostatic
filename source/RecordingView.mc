@@ -6,7 +6,7 @@ import Toybox.Lang;
 import Toybox.Math;
 import Toybox.WatchUi;
 
-class OrthostaticView extends WatchUi.View {
+class RecordingView extends WatchUi.View {
     private var _status;
     private var _duration;
     private var _position;
@@ -17,7 +17,7 @@ class OrthostaticView extends WatchUi.View {
 
     // Load your resources here
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.MainLayout(dc));
+        setLayout(Rez.Layouts.Recording(dc));
 
         _status = findDrawableById("status");
         _duration = findDrawableById("duration");

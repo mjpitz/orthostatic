@@ -9,9 +9,10 @@ import Toybox.Time;
 import Toybox.Timer;
 import Toybox.WatchUi;
 
-const MINUTE = 5;
+const MINUTE = 60;
 
-class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
+class RecordingDelegate extends WatchUi.BehaviorDelegate {
+    /// TODO: https://developer.garmin.com/connect-iq/core-topics/resources/#jsondata
     private var _steps as Array<Dictionary<Symbol, Number>> = [
         {:position => Position.LAYING_DOWN, :status => Status.ACCLIMATION, :duration => 5 * MINUTE},
         {:position => Position.LAYING_DOWN, :status => Status.MEASUREMENT, :duration => MINUTE},
@@ -33,7 +34,7 @@ class OrthostaticDelegate extends WatchUi.BehaviorDelegate {
     private var _view;
     private var _lastPosition;
 
-    function initialize(view as OrthostaticView) {
+    function initialize(view as RecordingView) {
         BehaviorDelegate.initialize();
         
         _timer = new Timer.Timer();

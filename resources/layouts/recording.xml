@@ -1,4 +1,4 @@
-<layout id="MainLayout">
+<layout id="Recording">
     <label
         id="status"
         text="Start when ready"

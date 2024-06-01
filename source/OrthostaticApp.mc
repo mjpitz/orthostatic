@@ -21,9 +21,10 @@ class OrthostaticApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        var view = new OrthostaticView();
+        var loop = new PageLoop();
+        var view = new ViewLoop(loop, {:wrap => true});
 
-        return [ view, new OrthostaticDelegate(view) ];
+        return [ view, new ViewLoopDelegate(view) ];
     }
 
 }
