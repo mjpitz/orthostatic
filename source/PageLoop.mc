@@ -5,25 +5,27 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 
 class PageLoop extends ViewLoopFactory {
-    private var _views as Array<[ WatchUi.View, WatchUi.BehaviorDelegate ]> = [];
-
     function initialize() {
         ViewLoopFactory.initialize();
-
-        var last = new LastView();
-        var recording = new RecordingView();
-        var history = new HistoryView();
-
-        _views.add([ last, new LastDelegate(last) ]);
-        _views.add([ recording, new RecordingDelegate(recording) ]);
-        //_views.add([ history, new HistoryDelegate(history) ]);
     }
 
     function getSize() as Number {
-        return _views.size();
+        return 2;
     }
 
     function getView(page as Number) as [ WatchUi.View ] or [ WatchUi.View, WatchUi.BehaviorDelegate ] {
-        return _views[page];
+        switch (page) {
+            case 0:
+                var last = new LastView();
+                return [ last, new LastDelegate(last) ];
+            case 1:
+                var recording = new RecordingView();
+                return [ recording, new RecordingDelegate(recording) ];
+            case 2:
+                var history = new HistoryView();
+                return [ history, new HistoryDelegate(history) ];
+        }
+
+        return [ null ] as [ WatchUi.View ];
     }
 }

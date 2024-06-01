@@ -53,11 +53,11 @@ class RecordingView extends WatchUi.View {
         switch(status) {
             case Status.ACCLIMATION:
                 label = "Acclimating";
-                color = Graphics.COLOR_YELLOW;
+                color = Graphics.COLOR_BLUE;
                 break;
             case Status.MEASUREMENT:
                 label = "Measuring";
-                color = Graphics.COLOR_RED;
+                color = Graphics.COLOR_YELLOW;
                 break;
             case Status.FINISHED:
                 label = "Finished";

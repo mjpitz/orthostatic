@@ -1,11 +1,92 @@
 <layout id="Last">
     <label
-        id="last"
-        text="Last"
+        text="Previous"
         x="center"
-        y="20%"
+        y="12%"
         color="Graphics.COLOR_WHITE"
         font="Graphics.FONT_TINY"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
+    />
+
+    <label
+        id="delta"
+        text="30 bpm"
+        x="center"
+        y="25%"
+        color="Graphics.COLOR_RED"
+        font="Graphics.FONT_SMALL"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+    />
+
+    <label
+        text="Laying"
+        x="47%"
+        y="42%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_RIGHT"
+    />
+    <label
+        id="laying"
+        text="80 bpm"
+        x="53%"
+        y="42%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_LEFT"
+    />
+
+    <label
+        text="Sitting"
+        x="47%"
+        y="52%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_RIGHT"
+    />
+    <label
+        id="sitting"
+        text="90 bpm"
+        x="53%"
+        y="52%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_LEFT"
+    />
+
+    <label
+        text="Standing"
+        x="47%"
+        y="62%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_RIGHT"
+    />
+    <label
+        id="standing"
+        text="110 bpm"
+        x="53%"
+        y="62%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_LEFT"
+    />
+
+    <label
+        text="After 3min"
+        x="47%"
+        y="72%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_RIGHT"
+    />
+    <label
+        id="after3min"
+        text="110 bpm"
+        x="53%"
+        y="72%"
+        color="Graphics.COLOR_WHITE"
+        font="Graphics.FONT_XTINY"
+        justification="Graphics.TEXT_JUSTIFY_LEFT"
     />
 </layout>
