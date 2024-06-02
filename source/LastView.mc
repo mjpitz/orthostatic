@@ -3,6 +3,7 @@
 
 import Toybox.Application;
 import Toybox.Lang;
+import Toybox.Math;
 import Toybox.Graphics;
 import Toybox.WatchUi;
 
@@ -27,10 +28,10 @@ class LastView extends WatchUi.View {
         _standing = findDrawableById("standing");
         _after3min = findDrawableById("after3min");
 
-        var laying = orDefault(Application.Storage.getValue("last_laying"), 0);
-        var sitting = orDefault(Application.Storage.getValue("last_sitting"), 0);
-        var standing = orDefault(Application.Storage.getValue("last_standing"), 0);
-        var after3min = orDefault(Application.Storage.getValue("last_after3min"), 0);
+        var laying = median(Application.Storage.getValue("last_laying"));
+        var sitting = median(Application.Storage.getValue("last_sitting"));
+        var standing = median(Application.Storage.getValue("last_standing"));
+        var after3min = median(Application.Storage.getValue("last_after3min"));
 
         setDelta(after3min - laying);
         setLaying(laying);
@@ -39,12 +40,22 @@ class LastView extends WatchUi.View {
         setAfter3Min(after3min, standing);
     }
 
-    function orDefault(test as Number, val as Number) as Number {
-        if (test == null) {
-            return val;
+    function median(val as Array<Number>) as Number {
+        val.sort(null);
+
+        var count = val.size();
+        if (count == 0) {
+            return 0;
         }
 
-        return test;
+        if (count % 2 == 0) {
+            var low = val[count/2];
+            var high = val[(count/2)+1];
+
+            return Math.floor((high + low) / 2);
+        } else {
+            return val[(count + 1) / 2];
+        }
     }
 
     function setDelta(val as Number) {

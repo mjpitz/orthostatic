@@ -29,7 +29,7 @@ class RecordingDelegate extends WatchUi.BehaviorDelegate {
     private var _started;
     private var _timer;
     private var _elapsed;
-    private var _sum;
+    private var _data;
 
     private var _view;
     private var _lastPosition;
@@ -39,7 +39,7 @@ class RecordingDelegate extends WatchUi.BehaviorDelegate {
         
         _timer = new Timer.Timer();
         _elapsed = 0;
-        _sum = 0;
+        _data = [];
 
         _view = view;
     }
@@ -65,17 +65,17 @@ class RecordingDelegate extends WatchUi.BehaviorDelegate {
     function tick() as Void {
         var sensorInfo = Sensor.getInfo();
         if (sensorInfo has :heartRate && sensorInfo.heartRate != null) {
-            _sum += sensorInfo.heartRate;
+            _data.add(sensorInfo.heartRate);
         }
         
         if (_elapsed == _steps[_step][:duration]) {
             if (_steps[_step][:store]) {
-                Application.Storage.setValue(_steps[_step][:store], Math.floor(_sum / _elapsed));
+                Application.Storage.setValue(_steps[_step][:store], _data);
             }
 
             _step++;
             _elapsed = 0;
-            _sum = 0;
+            _data = [];
 
             if (_step == _steps.size()) {
                 _timer.stop();
