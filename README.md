@@ -1,5 +1,11 @@
 A simple little application to take periodic orthostatic tests.
 
+<p align="center">
+    <img alt="Previous reading screen" src="assets/PreviousReading.png" width="200px"/>
+    <img alt="New reading screen" src="assets/NewReading.png" width="200px"/>
+    <img alt="New reading acclimating screen" src="assets/NewReadingAcclimating.png" width="200px"/>
+</p>
+
 **Medical Research**
 
 - [Agency for Healthcare Research and Quality - Orthostatic Vital Sign Measurement][]
