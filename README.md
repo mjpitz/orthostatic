@@ -45,3 +45,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+To append the required header to source code files, you can run the following command to ensure that it is added.
+
+```shell
+go install github.com/nokia/addlicense@latest
+
+addlicense -s -f legal/header.txt -config legal/addlicense.yaml .
+```

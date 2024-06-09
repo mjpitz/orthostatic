@@ -1,3 +1,8 @@
+<!--
+Copyright (C) 2024 Mya Pitzeruse
+SPDX-License-Identifier: Apache-2.0
+-->
+
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
 </drawables>
