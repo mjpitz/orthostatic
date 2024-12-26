@@ -41,13 +41,13 @@ class LastView extends WatchUi.View {
     }
 
     function median(val as Array<Number>) as Number {
-        val.sort(null);
-
-        var count = val.size();
-        if (count == 0) {
+        if (val == null || val.size() == 0) {
             return 0;
         }
 
+        val.sort(null);
+
+        var count = val.size();
         if (count % 2 == 0) {
             var low = val[count/2];
             var high = val[(count/2)+1];
